@@ -32,14 +32,13 @@
         }
         .time{
             width: 580px;
-            color: rgb(58, 58, 56);
+            /* color: rgb(58, 58, 56); */
             text-align: left;
             font-weight: bold;
         }
         #timer {
             font-size: 150px;
             font-weight: bolder;
-            color: rgb(29, 29, 30);
             margin-bottom: 20px;
         }
         .tab{
@@ -54,6 +53,22 @@
             margin-top: 5px;
             color: #565858;
         }
+        .abs button{
+            transition: all 1s;
+        }
+        .abs button:hover{
+            width: 150px;
+            color: aliceblue;
+        }
+        .reed{
+            color: rgb(47, 47, 48);
+            transition: all 1s;
+        }
+        .reed:hover{
+            background-color: #000000;
+            color: #717474;
+
+        }
     </style>
 </head>
 <body>
@@ -62,10 +77,13 @@
         <span>下午：13:50 ~ 18:30</span>
         <span>晚上：18:50 ~ 24:00</span>
     </div>
-    <div class="time">
-        上班时长：
+    <div class="reed">
+        <div class="time">
+            上班时长：
+        </div>
+        <span id="timer">00:00:00</span>   
     </div>
-    <span id="timer">00:00:00</span>
+
     
     <div class="abs">
         <button id="startBtn">开始计时</button>
