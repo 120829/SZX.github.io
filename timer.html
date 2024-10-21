@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计时器</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        button {
+            margin: 5px;
+            width: 170px;
+            padding: 15px 20px;
+            border: 0px;
+            border-radius: 5px;
+            background-color: #101011;
+            font-size: 16px;
+            color: #454848;
+        }
+        .abs{
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+        }
+        .time{
+            width: 580px;
+            color: rgb(58, 58, 56);
+            text-align: left;
+            font-weight: bold;
+        }
+        #timer {
+            font-size: 150px;
+            font-weight: bolder;
+            color: rgb(29, 29, 30);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="time">
+        上班时长：
+    </div>
+    <span id="timer">00:00:00</span>
+    
+    <div class="abs">
+        <button id="startBtn">开始计时</button>
+        <button id="pauseBtn">暂停计时</button>
+        <button id="resetBtn">重置</button>
+    </div>
+
+
+    <script>
+        let timer;
+        let seconds = parseInt(localStorage.getItem('seconds')) || 0;
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            document.getElementById('timer').textContent = `${hours}:${minutes}:${secs}`;
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(() => {
+                    seconds++;
+                    localStorage.setItem('seconds', seconds);
+                    updateTimerDisplay();
+                }, 1000);
+            }
+        }
+
+        document.getElementById('startBtn').addEventListener('click', startTimer);
+        
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+            seconds = 0;
+            localStorage.removeItem('seconds');
+            updateTimerDisplay();
+        });
+
+        // 初始化计时器显示
+        updateTimerDisplay();
+        
+        // 如果页面加载时正在计时，重新启动计时器
+        if (localStorage.getItem('seconds') && !isRunning) {
+            startTimer();
+        }
+    </script>
+</body>
+</html>
