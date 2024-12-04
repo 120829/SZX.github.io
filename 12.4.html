@@ -1,0 +1,654 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+html {
+	font-size: 19px;
+}
+
+html, body {
+	margin: auto;
+	background: #fefefe;
+	-webkit-font-smoothing: antialiased;
+}
+body {
+	font-family: "Vollkorn", Palatino, Times;
+	color: #333;
+	line-height: 1.4;
+	text-align: justify;
+}
+
+#write {
+	max-width: 960px;
+	margin: 0 auto;
+	margin-bottom: 2em;
+	line-height: 1.53;
+	padding-top: 40px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1100px;
+	}
+}
+
+@media print {
+	html {
+		font-size: 13px;
+	}
+}
+
+/* Typography
+-------------------------------------------------------- */
+
+#write>h1:first-child,
+h1 {
+	margin-top: 1.6em;
+	font-weight: normal;
+}
+
+h1 {
+	font-size:3em;
+}
+
+h2 {
+	margin-top:2em;
+	font-weight: normal;
+}
+
+h3 {
+	font-weight: normal;
+	font-style: italic;
+	margin-top: 3em;
+}
+
+h1, 
+h2, 
+h3{
+	text-align: center;
+}
+
+h2:after{
+	border-bottom: 1px solid #2f2f2f;
+    content: '';
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    height: 1px;
+}
+
+h1+h2, h2+h3 {
+	margin-top: 0.83em;
+}
+
+p,
+.mathjax-block {
+	margin-top: 0;
+	-webkit-hypens: auto;
+	-moz-hypens: auto;
+	hyphens: auto;
+}
+ul {
+	list-style: square;
+	padding-left: 1.2em;
+}
+ol {
+	padding-left: 1.2em;
+}
+blockquote {
+	margin-left: 1em;
+	padding-left: 1em;
+	border-left: 1px solid #ddd;
+}
+code,
+pre {
+	font-family: "Consolas", "Menlo", "Monaco", monospace, serif;
+	font-size: .9em;
+	background: white;
+}
+.md-fences{
+	margin-left: 1em;
+	padding-left: 1em;
+	border: 1px solid #ddd;
+	padding-bottom: 8px;
+	padding-top: 6px;
+	margin-bottom: 1.5em;
+}
+
+a {
+	color: #2484c1;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a img {
+	border: none;
+}
+h1 a,
+h1 a:hover {
+	color: #333;
+	text-decoration: none;
+}
+hr {
+	color: #ddd;
+	height: 1px;
+	margin: 2em 0;
+	border-top: solid 1px #ddd;
+	border-bottom: none;
+	border-left: 0;
+	border-right: 0;
+}
+.ty-table-edit {
+	background: #ededed;
+    padding-top: 4px;
+}
+table {
+	margin-bottom: 1.333333rem
+}
+table th,
+table td {
+	padding: 8px;
+	line-height: 1.333333rem;
+	vertical-align: top;
+	border-top: 1px solid #ddd
+}
+table th {
+	font-weight: bold
+}
+table thead th {
+	vertical-align: bottom
+}
+table caption+thead tr:first-child th,
+table caption+thead tr:first-child td,
+table colgroup+thead tr:first-child th,
+table colgroup+thead tr:first-child td,
+table thead:first-child tr:first-child th,
+table thead:first-child tr:first-child td {
+	border-top: 0
+}
+table tbody+tbody {
+	border-top: 2px solid #ddd
+}
+
+.task-list{
+	padding:0;
+}
+
+.md-task-list-item {
+	padding-left: 1.6rem;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.33333333rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #fefefe;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+.md-tag {
+	color: inherit;
+	font: inherit;
+}
+#write pre.md-meta-block {
+	min-height: 35px;
+	padding: 0.5em 1em;
+}
+#write pre.md-meta-block {
+	white-space: pre;
+	background: #f8f8f8;
+	border: 0px;
+	color: #999;
+	
+	width: 100vw;
+	max-width: calc(100% + 60px);
+	margin-left: -30px;
+	border-left: 30px #f8f8f8 solid;
+	border-right: 30px #f8f8f8 solid;
+
+	margin-bottom: 2em;
+	margin-top: -1.3333333333333rem;
+	padding-top: 26px;
+	padding-bottom: 10px;
+	line-height: 1.8em;
+	font-size: 0.9em;
+	font-size: 0.76em;
+	padding-left: 0;
+}
+.md-img-error.md-image>.md-meta{
+	vertical-align: bottom;
+}
+#write>h5.md-focus:before {
+	top: 2px;
+}
+
+.md-toc {
+	margin-top: 40px;
+}
+
+.md-toc-content {
+	padding-bottom: 20px;
+}
+
+.outline-expander:before {
+	color: inherit;
+	font-size: 14px;
+	top: auto;
+	content: "\f0da";
+	font-family: FontAwesome;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  	content: "\f0d7";
+}
+
+/** source code mode */
+#typora-source {
+	font-family: Courier, monospace;
+    color: #6A6A6A;
+}
+
+.html-for-mac #typora-sidebar {
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.cm-s-typora-default .cm-header, 
+.cm-s-typora-default .cm-property,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+	color: #428bca;
+}
+
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number {
+	color: #777777;
+}
+
+.typora-node .file-list-item-parent-loc, 
+.typora-node .file-list-item-time, 
+.typora-node .file-list-item-summary {
+	font-family: arial, sans-serif;
+}
+
+.md-task-list-item>input {
+    margin-left: -1.3em;
+    margin-top: calc(1rem - 12px);
+}
+
+.md-mathjax-midline {
+	background: #fafafa;
+}
+
+.md-fences .code-tooltip {
+	bottom: -2em !important;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+							stroke-width: 0;
+						}
+</style><title>PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><center><h1>PhysGaussian: Physics-Integrated 3D Gaussians for Generative Dynamics</h1></center><center><h3>物理集成的 3D 高斯分布用于生成动力学</h3></center><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021437511.png" referrerpolicy="no-referrer" alt="image-20241203021437511"></p><p><span>图1. </span><strong><span>PhysGaussian</span></strong><span> 是一个基于 3D 高斯分布和连续介质力学的统一仿真渲染管线。</span></p><p><span>我们介绍了 </span><strong><span>PhysGaussian</span></strong><span>，一种新方法，它将物理基础的牛顿动力学无缝集成到 3D 高斯分布中，以实现高质量的新型运动合成。通过采用定制的材料点方法（MPM），我们的方法将物理上有意义的运动变形和机械应力属性融入到 3D 高斯核中，并且这些属性的演变符合连续介质力学的原理。我们方法的一个关键特点是物理仿真和视觉渲染的无缝集成：这两个组件都使用相同的 3D 高斯核作为其离散表示。这消除了三角形/四面体网格、行进立方体、&quot;笼网格&quot; 或任何其他几何体嵌入的需求，突显了“你看到的就是你模拟的（WS2）”这一原则。我们的方法在各种材料中表现出卓越的多样性——包括弹性物体、塑性金属、非牛顿流体和颗粒材料——展示了其在创造多样化视觉内容以及新颖视角和运动方面的强大能力。我们的项目页面地址是：</span><a href='https://xpandora.github.io/PhysGaussian/' target='_blank' class='url'>https://xpandora.github.io/PhysGaussian/</a><span>。</span></p><p><span>近期，神经辐射场（NeRF）在 3D 图形和计算机视觉领域取得了显著进展 [24]。这些进展得到了先进的 3D 高斯溅射（GS）框架的进一步增强 [16]。尽管取得了许多成就，但在生成新型动力学方面仍然存在显著的差距。虽然有一些研究尝试为 NeRF 生成新的姿势，但这些方法通常只针对准静态几何形状编辑任务，并且通常需要网格化或将视觉几何嵌入粗略的代理网格（如四面体）中 [12, 28, 47, 51]。</span></p><p><span>与此同时，传统的基于物理的视觉内容生成管线是一个繁琐的多阶段过程：构建几何形状、使其适合仿真（通常通过四面体化等技术）、通过物理模拟进行仿真，最后进行渲染。这个过程虽然有效，但引入了中间阶段，可能导致仿真与最终可视化之间的不一致。即便在 NeRF 模型中，也可以观察到类似的趋势，因为渲染几何形状被嵌入到仿真几何形状中。这种分离本质上与自然世界相对立，因为在自然界中，材料的物理行为和视觉外观是内在交织在一起的。我们的总体理念是通过倡导一种统一的物质表示，将这两个方面对齐，这种表示既用于仿真，也用于渲染。从本质上讲，我们的方法提倡“你看到的就是你模拟的（WS2）”原则 [25]，旨在实现仿真、捕捉和渲染的更紧密集成。</span></p><p><span>为实现这一目标，我们引入了 </span><strong><span>PhysGaussian</span></strong><span>：一种集成物理的 3D 高斯分布，用于生成动力学。这种新方法使得 3D 高斯分布能够囊括物理合理的牛顿动力学，包括固体材料固有的现实行为和惯性效应。更具体地说，我们为 3D 高斯核赋予了物理属性，使其具备运动学特性，如速度和应变，以及机械属性，如弹性能量、应力和塑性。值得注意的是，通过连续介质力学原理和定制的材料点方法（MPM），</span><strong><span>PhysGaussian</span></strong><span> 确保了物理仿真和视觉渲染都由 3D 高斯分布驱动。这消除了任何嵌入机制的需求，从而消除了仿真和渲染之间的差异或分辨率不匹配。我们展示了 </span><strong><span>PhysGaussian</span></strong><span> 在生成不同材料动力学方面的多样性，包括弹性物体、金属、非牛顿粘弹性物质（如泡沫或凝胶）以及颗粒介质（如沙子或土壤）。总结来说，我们的贡献包括：</span></p><ul><li><strong><span>连续介质力学用于 3D 高斯运动学</span></strong><span>：我们提出了一种基于连续介质力学的策略，专门用于驱动 3D 高斯核及其相关的球面调和函数在物理偏微分方程（PDE）驱动的位移场中演化。</span></li><li><strong><span>统一仿真-渲染管线</span></strong><span>：我们提出了一种高效的仿真与渲染管线，采用统一的 3D 高斯表示。通过消除显式物体网格化的额外工作，运动生成过程得到了显著简化。</span></li><li><strong><span>多样的基准测试和实验</span></strong><span>：我们进行了全面的基准测试和实验，涵盖了多种材料。通过实时的 GS 渲染和高效的 MPM 仿真，我们实现了具有简单动力学场景的实时性能。</span></li></ul><p><strong><span>辐射场渲染与视图合成</span></strong>
+<span> 辐射场方法近年来受到了广泛关注，主要是由于其在生成新视角场景和3D重建方面的卓越能力。深度学习技术的采用推动了神经渲染和基于点的渲染方法的兴起，这些方法启发了许多后续研究。一方面，NeRF框架采用全连接网络来建模一个场景 [24]。该网络以空间位置和观察方向为输入，生成体积密度和辐射颜色。这些输出随后通过体积渲染技术用于图像生成。在NeRF的基础上，进一步的研究集中在提升重建质量和加速训练速度 [1, 7, 20, 26, 40, 46]。另一方面，研究人员还探索了可微分的基于点的方法，用于实时渲染无界场景。在当前的研究中，最先进的成果来自于最近发布的3D高斯溅射（GS）框架 [16]。与以前的隐式神经表示方法不同，GS采用显式且无结构的场景表示，具有直接扩展到后期处理的优势。此外，其快速的可见性感知渲染算法还能够生成现实世界中的动态。</span></p><p><strong><span>动态神经辐射场</span></strong>
+<span> NeRF框架的内在演化是引入时间维度，以便表示动态场景。例如，Pumarola等人 [30] 和Park等人 [27] 将时变神经场分解为逆位移场和规范化的时间不变神经场。在这个背景下，查询射线的轨迹通过逆位移场进行改变，然后定位在规范空间中。后续研究在探索与NeRF变形相关的应用时，遵循了上述设计，例如静态场景编辑和动态场景重建 [5, 19, 21, 28, 31, 32, 51]。此外，Liu等人 [21]、Qiao等人 [31]、Yuan等人 [51] 已经将基于物理的变形集成到NeRF框架中。然而，这些方法的有效性依赖于从NeRF导出的网格的使用。为了绕过这一限制，研究者探索了显式几何表示用于正向位移建模 [16, 46]。特别是，Chen等人 [6]、Luiten等人 [22]、Wu等人 [45] 和Yang等人 [48, 49] 直接操作NeRF场。Li等人 [18] 通过引入物理模拟器扩展了这一方法，以实现更动态的行为。在本研究中，我们利用显式的3D高斯溅射椭球体作为物理和图形的统一表示。与以往的动态GS框架不同，这些框架要么保持高斯核的形状，要么学习修改它们，我们的方法独特地利用了来自位移图（变形梯度）的一级信息来辅助动态仿真。通过这种方式，我们能够变形高斯核，并将仿真无缝集成到GS框架中。</span></p><p><strong><span>材料点方法（MPM）</span></strong>
+<span> 材料点方法（MPM）是一个广泛应用的仿真框架，用于模拟各种多物理现象 [10]。MPM系统的固有能力允许拓扑变化和摩擦相互作用，使其适用于模拟各种材料，包括但不限于弹性物体、流体、沙子和雪 [13, 17, 39]。MPM还可以扩展到模拟具有共维特征的物体 [15]。此外，利用GPU加速MPM实现的效果也在 [8, 11, 33, 44] 中得到了验证。由于其文献中有很多优势，我们选择使用MPM来支持潜在的物理动态。这一选择使我们能够通过共享粒子表示与高斯溅射框架一起高效地将动态导入到各种场景中。</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021523936.png" referrerpolicy="no-referrer" alt="image-20241203021523936"></p><p><span>图2. 方法概览。</span><strong><span>PhysGaussian</span></strong><span> 是一个统一的仿真渲染管线，结合了 3D 高斯溅射表示和连续介质力学，能够同时无缝地生成基于物理的动力学和逼真的渲染图像。</span></p><p><span>我们提出了 </span><strong><span>PhysGaussian</span></strong><span>（图2），一个基于连续介质力学和 3D 高斯溅射（GS）的统一仿真渲染框架，用于生成动力学。借鉴了 Kerbl 等人 [16] 的方法，我们首先重建一个静态场景的 GS 表示，并加入可选的各向异性损失项，以对过于细长的高斯核进行正则化。这些高斯核被视为场景的离散化表示，用于进行仿真。在我们创新的运动学下，我们直接将变形后的高斯核进行溅射，以实现逼真的渲染图像。为了更好地符合物理规律，我们还可选地填充物体的内部区域。我们将在本节中详细介绍这些内容。</span></p><h2 id='31-3dgs方法'><span>3.1 3DGS方法</span></h2><p><span>3D 高斯溅射方法 [16] 通过一组无结构的 3D 高斯核</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103719752.png" referrerpolicy="no-referrer" alt="image-20241203103719752"><span> 对 NeRF [24] 进行了重新参数化，其中 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103738828.png" referrerpolicy="no-referrer" alt="image-20241203103738828"><span> 和 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103752182.png" referrerpolicy="no-referrer" alt="image-20241203103752182"><span> 分别表示高斯核的中心、透明度、协方差矩阵和球面调和系数。为了渲染视图，GS 将这些 3D 高斯核投影到图像平面上作为 2D 高斯核，这与传统的 NeRF 技术通过摄像机发射射线的方式不同。每个像素的最终颜色通过以下公式计算：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021554348.png" referrerpolicy="no-referrer" alt="image-20241203021554348"></p><p><span>其中，</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103813890.png" referrerpolicy="no-referrer" alt="image-20241203103813890"><span> 表示按 z 深度排序的有效透明度，即 2D 高斯权重及其总体透明度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103850020.png" referrerpolicy="no-referrer" alt="image-20241203103850020"><span> 的乘积；</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103909468.png" referrerpolicy="no-referrer" alt="image-20241203103909468"><span> 表示从摄像机到 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103921996.png" referrerpolicy="no-referrer" alt="image-20241203103921996"><span> 的视角方向。每视图优化使用 L1 损失和 SSIM 损失进行。该场景的显式表示不仅显著加速了训练和渲染速度，而且还使得 NeRF 场景的直接操控成为可能。数据驱动的动力学通过使 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203103943041.png" referrerpolicy="no-referrer" alt="image-20241203103943041"><span> 随时间变化来支持 [45]，并通过最小化视频的渲染损失来实现。在第 3.1 节中，我们展示了这种时间依赖性演化可以通过连续变形映射来给出。</span></p><h2 id='32-连续介质力学'><span>3.2 连续介质力学</span></h2><p><span>连续介质力学通过一个时间依赖的连续变形映射 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104018960.png" referrerpolicy="no-referrer" alt="image-20241203104018960"><span>，描述了从未变形的物质空间 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104035996.png" referrerpolicy="no-referrer" alt="image-20241203104035996"><span> 到变形后的世界空间 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104048294.png" referrerpolicy="no-referrer" alt="image-20241203104048294"><span> 的运动，其中 tt 是时间。变形梯度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104106600.png" referrerpolicy="no-referrer" alt="image-20241203104106600"><span> 编码了局部变换，包括拉伸、旋转和剪切 [2]。变形 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104126137.png" referrerpolicy="no-referrer" alt="image-20241203104126137"><span> 的演化遵循质量守恒和动量守恒定律。质量守恒确保在任何微小区域 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104143576.png" referrerpolicy="no-referrer" alt="image-20241203104143576"><span> 内的质量随时间保持不变：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021633814.png" referrerpolicy="no-referrer" alt="image-20241203021633814"></p><p><span>其中</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104201691.png" referrerpolicy="no-referrer" alt="image-20241203104201691"><span>，且 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104217457.png" referrerpolicy="no-referrer" alt="image-20241203104217457"><span> 是表征材料分布的密度场。通过速度场</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104236469.png" referrerpolicy="no-referrer" alt="image-20241203104236469"><span> 表示动量守恒，动量守恒方程为：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021647313.png" referrerpolicy="no-referrer" alt="image-20241203021647313"></p><p><span>其中 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104300826.png" referrerpolicy="no-referrer" alt="image-20241203104300826"><span> 是与超弹性能量密度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104333245.png" referrerpolicy="no-referrer" alt="image-20241203104333245"><span> 相关的 Cauchy 应力张量，</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104349954.png" referrerpolicy="no-referrer" alt="image-20241203104349954"><span> 是单位体积的外力 [2, 14]。这里，总变形梯度可以分解为弹性部分和塑性部分 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104407891.png" referrerpolicy="no-referrer" alt="image-20241203104407891"><span>，以支持由塑性引起的永久性静态形状变化。 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104420604.png" referrerpolicy="no-referrer" alt="image-20241203104420604"><span> 的演化遵循某种特定的塑性流动规律，使其始终约束在预定义的弹性区域内 [2]。</span></p><h2 id='33-物质点法'><span>3.3 物质点法</span></h2><p><span>材料点法（MPM）通过结合拉格朗日粒子和欧拉网格的优势，求解上述控制方程 [14, 39]。连续介质通过一组粒子进行离散化，每个粒子代表一个小的物质区域。这些粒子跟踪几个随时间变化的拉格朗日量，如位置</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104454064.png" referrerpolicy="no-referrer" alt="image-20241203104454064"><span>、速度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104509223.png" referrerpolicy="no-referrer" alt="image-20241203104509223"><span> 和变形梯度</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104524430.png" referrerpolicy="no-referrer" alt="image-20241203104524430"><span>。拉格朗日粒子的质量守恒确保了在运动过程中总质量的恒定。相反，动量守恒在欧拉表示中更加自然，避免了网格构建。我们遵循 Stomakhin 等人 [39] 的方法，使用 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104544451.png" referrerpolicy="no-referrer" alt="image-20241203104544451"><span> 连续 B 样条核来进行双向转换，整合这些表示。从时间步</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104558224.png" referrerpolicy="no-referrer" alt="image-20241203104558224"><span>到 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104612845.png" referrerpolicy="no-referrer" alt="image-20241203104612845"><span>，动量守恒通过向前欧拉法离散化，表示为：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021734873.png" referrerpolicy="no-referrer" alt="image-20241203021734873"></p><p><span>其中，i 和 p 分别表示欧拉网格和拉格朗日粒子上的字段；</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104637804.png" referrerpolicy="no-referrer" alt="image-20241203104637804"><span> 是定义在第 i 个网格上的 B 样条核，在 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104716310.png" referrerpolicy="no-referrer" alt="image-20241203104716310"><span> 处求值；</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104729167.png" referrerpolicy="no-referrer" alt="image-20241203104729167"><span> 是初始表示体积，</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104823006.png" referrerpolicy="no-referrer" alt="image-20241203104823006"><span> 是时间步长。更新后的网格速度场 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104847603.png" referrerpolicy="no-referrer" alt="image-20241203104847603"><span> 会被转移回粒子上，得到 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104906014.png" referrerpolicy="no-referrer" alt="image-20241203104906014"><span>，并更新粒子的位置为</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104928983.png" referrerpolicy="no-referrer" alt="image-20241203104928983"><span>。我们追踪 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203104946346.png" referrerpolicy="no-referrer" alt="image-20241203104946346"><span>，而不是 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105003574.png" referrerpolicy="no-referrer" alt="image-20241203105003574"><span> 和 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105018940.png" referrerpolicy="no-referrer" alt="image-20241203105018940"><span> [37]，更新为：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021920384.png" referrerpolicy="no-referrer" alt="image-20241203021920384"></p><p><span>并通过额外的返回映射进行正则化，以支持塑性演化：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203021937245.png" referrerpolicy="no-referrer" alt="image-20241203021937245"></p><p><span>不同的塑性模型定义不同的返回映射。我们在补充文件中详细说明了仿真算法和不同的返回映射。</span></p><h2 id='34-物理场集成的-3d-高斯'><span>3.4 物理场集成的 3D 高斯</span></h2><p><span>我们将高斯核视为离散粒子云，用于空间离散化模拟的连续介质。随着连续介质的变形，我们也让高斯核随之变形。然而，对于在材料空间中定义的高斯核 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022021262.png" referrerpolicy="no-referrer" alt="image-20241203022021262"><span>，在变形映射 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105041602.png" referrerpolicy="no-referrer" alt="image-20241203105041602"><span> 下的变形核 </span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022341729.png" referrerpolicy="no-referrer" alt="image-20241203022341729"></p><p><span> 在世界空间中不一定是高斯分布，这违反了 splatting 过程的要求。幸运的是，如果我们假设粒子经历由一阶近似所定义的局部仿射变换，即</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022204089.png" referrerpolicy="no-referrer" alt="image-20241203022204089"></p><p><span>那么变形后的核将如期变为高斯形式：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022404697.png" referrerpolicy="no-referrer" alt="image-20241203022404697"></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105749316.png" referrerpolicy="no-referrer" alt="image-20241203105749316"></p><p><span>这个变换自然提供了时间依赖版本的</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105109515.png" referrerpolicy="no-referrer" alt="image-20241203105109515"><span> 和 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105119219.png" referrerpolicy="no-referrer" alt="image-20241203105119219"><span> 用于 3D GS 框架：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022421023.png" referrerpolicy="no-referrer" alt="image-20241203022421023"></p><p><span>总结来说，给定静态场景的 3D GS 表示</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022534290.png" referrerpolicy="no-referrer" alt="image-20241203022534290"><span>，我们通过模拟使场景动态化，演化这些高斯核，生成动态高斯核 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022516759.png" referrerpolicy="no-referrer" alt="image-20241203022516759"><span>。这里我们假设不透明度和球面谐波系数在时间上不变，但球面谐波会随着时间进行旋转，具体细节将在下一节讨论。我们还初始化了公式 (4) 中的其他物理量：每个粒子的代表体积</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105158231.png" referrerpolicy="no-referrer" alt="image-20241203105158231"><span> 被初始化为背景单元体积除以包含的粒子数量；质量 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105240892.png" referrerpolicy="no-referrer" alt="image-20241203105240892"><span> 随后从用户指定的密度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105225688.png" referrerpolicy="no-referrer" alt="image-20241203105225688"><span> 推断为</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022454167.png" referrerpolicy="no-referrer" alt="image-20241203022454167"><span>。</span></p><p><span>为了渲染这些变形后的高斯核，我们使用来自原始 GS 框架的 splatting 方法 [16]。需要强调的是，物理与 3D 高斯核的集成是无缝的：一方面，高斯核本身被视为连续介质的离散化，可以直接进行模拟；另一方面，变形后的高斯核可以通过 splatting 过程直接渲染，避免了传统动画管道中使用商业渲染软件的需求。最重要的是，我们可以直接模拟从真实数据重建的场景，实现了“你看到的就是你模拟的”原则 (WS2)。</span></p><h2 id='35-球谐波的演变取向'><span>3.5 球谐波的演变取向</span></h2><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105720991.png" referrerpolicy="no-referrer" alt="image-20241203105720991"></p><p><span>渲染世界空间中的 3D 高斯核已经能够获得高质量的结果。然而，当物体发生旋转时，球面谐波基仍然在材料空间中表示，即使视角相对于物体固定，物体的外观仍会变化。解决方法很简单：当椭球体随时间旋转时，我们也旋转其球面谐波的方向。然而，这些基是硬编码在 GS 框架中的。我们通过对视角进行逆旋转来等效地实现这一变化。这个效果如插图所示。需要注意的是，Wu 等人 [45] 没有考虑视角的旋转，Chen 等人 [6] 在 Point-NeRF 框架中解决了这个问题，但需要跟踪表面方向。在我们的框架中，局部旋转可以直接通过变形梯度 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105342603.png" referrerpolicy="no-referrer" alt="image-20241203105342603"><span> 获得。设</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105356603.png" referrerpolicy="no-referrer" alt="image-20241203105356603"><span>为材料空间中的球面谐波基，d 为单位球面上的点（表示视角方向)。通过极分解 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105417470.png" referrerpolicy="no-referrer" alt="image-20241203105417470"><span>，我们得到旋转后的谐波基：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022614525.png" referrerpolicy="no-referrer" alt="image-20241203022614525"></p><h2 id='36-高斯的增量演化'><span>3.6 高斯的增量演化</span></h2><p><span>我们还提出了一种替代的高斯运动学方法，它更适合更新的拉格朗日框架，并避免依赖总变形梯度</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.695ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 749 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-3-TEX-I-1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D439" xlink:href="#MJX-3-TEX-I-1D439"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>F</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex"> F</script><span>。这种方法也为不依赖于使用</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.695ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 749 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-4-TEX-I-1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D439" xlink:href="#MJX-4-TEX-I-1D439"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>F</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex"> F </script><span>作为应变度量的物理材料模型铺平了道路。按照计算流体动力学中的惯例 [4, 23]，我们可以通过离散化运动学的速率形式</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023253436.png" referrerpolicy="no-referrer" alt="image-20241203023253436"><span>来推导世界空间协方差矩阵 aa 的更新规则：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022633751.png" referrerpolicy="no-referrer" alt="image-20241203022633751"></p><p><span>这个公式使得我们能够在不需要获取</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105454735.png" referrerpolicy="no-referrer" alt="image-20241203105454735"><span> 的情况下，从时间步 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105507835.png" referrerpolicy="no-referrer" alt="image-20241203105507835"><span> 到</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105521157.png" referrerpolicy="no-referrer" alt="image-20241203105521157"><span> 进行高斯核形状的增量更新。每个球面谐波基的旋转矩阵 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105541760.png" referrerpolicy="no-referrer" alt="image-20241203105541760"><span> 也可以以类似的方式增量更新。从 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022718934.png" referrerpolicy="no-referrer" alt="image-20241203022718934"><span> 开始，我们通过极分解从</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022746381.png" referrerpolicy="no-referrer" alt="image-20241203022746381"><span> 提取出旋转矩阵 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022814121.png" referrerpolicy="no-referrer" alt="image-20241203022814121"><span>。</span></p><h2 id='37-内部填充'><span>3.7 内部填充</span></h2><p><span>物体的表面遮挡了内部结构，因为重建的高斯核往往分布在表面附近，这导致体积物体的行为不准确。为了填充物体的空洞内部区域，受到 Tang 等人 [42] 启发，我们借用 3D 高斯的 3D 不透明度场：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022850788.png" referrerpolicy="no-referrer" alt="image-20241203022850788"></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105652472.png" referrerpolicy="no-referrer" alt="image-20241203105652472"></p><p><span>该连续场被离散化到一个 3D 网格上。为了实现稳健的内部填充，我们首先定义在不透明度场中的“交点”概念，该概念由用户定义的阈值 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023219985.png" referrerpolicy="no-referrer" alt="image-20241203023219985"><span> 引导。具体而言，当射线从一个低不透明度网格</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022923667.png" referrerpolicy="no-referrer" alt="image-20241203022923667"><span>穿过到一个高不透明度网格</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203022945943.png" referrerpolicy="no-referrer" alt="image-20241203022945943"><span>时，我们认为它发生了交点。基于这个定义，我们通过沿着六个轴投射射线并检查交点（条件 1）来识别候选网格。从内部单元发出的射线将始终与表面相交。为了进一步精细化候选网格的选择，我们使用额外的射线来评估交点数量（条件 2），从而确保更高的准确性。这些内部粒子的可视化也至关重要，因为它们可能因大变形而暴露出来。这些填充的粒子继承了它们最接近的高斯核的 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023120784.png" referrerpolicy="no-referrer" alt="image-20241203023120784"><span>。每个粒子的协方差矩阵初始化为 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023014663.png" referrerpolicy="no-referrer" alt="image-20241203023014663"><span>，其中 rpr_p 是由其体积计算的粒子半径：</span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023045013.png" referrerpolicy="no-referrer" alt="image-20241203023045013"><span>。或者，也可以考虑使用生成模型进行内部填充，这可能会带来更真实的结果。</span></p><h2 id='38-各向异性正则化器'><span>3.8 各向异性正则化器</span></h2><p><span>高斯核的各向异性提高了 3D 表示的效率，但在大变形下，过于瘦长的高斯核可能会从物体表面指向外部，导致意外的毛绒伪影。我们提出了以下用于 3D 高斯重建的训练损失：</span></p><p><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203023453613.png" referrerpolicy="no-referrer" alt="image-20241203023453613"></p><p><span>其中 </span><img src="PhysGaussian Physics-Integrated 3D Gaussians for Generative Dynamics.assets/image-20241203105618887.png" referrerpolicy="no-referrer" alt="image-20241203105618887"><span> 是 3D 高斯的尺度 [16]。该损失基本上限制了主轴长度与次轴长度之间的比例不超过 r。如果需要，可以将此项添加到训练损失中。</span></p><p>&nbsp;</p></div></div>
+</body>
+</html>
